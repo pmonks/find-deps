@@ -23,6 +23,10 @@ clj -A:find-deps -F:save priority-map
 #+END_SRC
 
 *** Changelog
+- 2021-08-09 (Peter Monks)
+  - add development-time tooling (compilation checks, outdated dependency checking, linters)
+  - update all dependencies to latest and fix fallout
+  - (partially) fix a reflection warning
 - Note taken on [2018-06-25 Mon 10:39]
 - 2018-06-25
   - hide snapshot versions by default in clojars (fixes #2)
