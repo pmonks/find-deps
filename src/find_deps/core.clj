@@ -4,7 +4,9 @@
             [find-deps.search :as search]
             [find-deps.rank :as rank]
             [clojure.string :as str]
-            [clojure.java.io :as io])
+            [clojure.java.io :as io]
+            [clojure.edn :as edn]
+            [clojure.pprint :as pp])
   (:import (java.io InputStream)))
 
 (Thread/setDefaultUncaughtExceptionHandler
@@ -35,20 +37,20 @@
   []
   (if (stream-available? System/in)
     (with-open [r (java.io.PushbackReader. (io/reader *in*))]
-      (clojure.edn/read r))
+      (edn/read r))
     {:deps {}}))
 
 (defn get-deps-edn-file
   ([] (get-deps-edn-file "deps.edn"))
   ([path]
    (try
-     (clojure.edn/read-string (slurp path))
+     (edn/read-string (slurp path))
      (catch Throwable _ {:deps {}}))))
 
 (defn write-deps-edn
-  [deps stream]
+  [deps ^java.io.OutputStream stream]
   (binding [*print-namespace-maps* false]
-    (.write stream (with-out-str (clojure.pprint/pprint deps)))))
+    (.write stream (with-out-str (pp/pprint deps)) "UTF-8")))
 
 (def cli-options
   [["-s"
@@ -240,7 +242,7 @@
   (print "")
   (flush)
   (let [{:keys [search-strings options exit-message ok?]} (validate-args args)]
-    #_(clojure.pprint/pprint (conj (vec search-strings) options))
+    #_(pp/pprint (conj (vec search-strings) options))
     (if exit-message
       (exit (if ok? 0 1) exit-message)
       (binding [*print-namespace-maps* false]
