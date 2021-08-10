@@ -21,7 +21,7 @@
           (reverse
            (reduce-kv (fn [m [g a] v]
                         (update m g (fnil + 0) (reduce + (vals v))))
-                      (clojure.data.priority-map/priority-map) stats)))))
+                      (priority-map) stats)))))
 
 (def mvn-nudges #{"org.apache" "org.clojure" "io.pedestal" "cognitect"})
 (def top-groups (set/union
