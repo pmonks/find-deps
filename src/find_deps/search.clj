@@ -127,7 +127,7 @@
   (time (query "reagent" #{:mvn :clojars}))
 
   (first (filter (comp #(re-find #"SNAPSHOT" %) :version) (search :clojars "reagent")))
-  
+
 
   (filter (comp #{"reagent"} :artifact) (query "reagent" #{:mvn :clojars}))
 
@@ -144,5 +144,5 @@
       deref
       :body
       (json/read-value (json/object-mapper {:decode-key-fn (comp keyword hyphenate)})))
-  
+
   (count (search :clojars "clojure")))

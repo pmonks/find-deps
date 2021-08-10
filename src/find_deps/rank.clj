@@ -1,6 +1,8 @@
 (ns find-deps.rank
-  (:require [clj-fuzzy.metrics :as fm]
-            [clojure.data.priority-map :refer [priority-map priority-map-keyfn]]))
+  (:require [clojure.set :as set]
+            [clj-fuzzy.metrics :as fm]
+            [clojure.data.priority-map :refer [priority-map priority-map-keyfn]]
+            [org.httpkit.client :as http]))
 
 
 (defn- compute-top-groups
@@ -8,7 +10,7 @@
   []
   (let [stats
         (-> "https://clojars.org/stats/all.edn"
-            org.httpkit.client/get
+            http/get
             deref
             :body
             read-string)]
@@ -22,7 +24,7 @@
                       (clojure.data.priority-map/priority-map) stats)))))
 
 (def mvn-nudges #{"org.apache" "org.clojure" "io.pedestal" "cognitect"})
-(def top-groups (clojure.set/union
+(def top-groups (set/union
                  mvn-nudges
                  #{"ring" "pjstadig" "clj-stacktrace" "clj-tuple" "net.cgrand" "slingshot" "clojure-complete" "clout" "ring-mock" "cheshire" "potemkin" "clj-http" "hiccup" "riddley" "clj-time" "prismatic" "compojure" "metosin" "com.taoensso" "tigris" }))
 

@@ -4,10 +4,11 @@
             [inflections.core :refer [hyphenate]]
             [clojure.string :as str]
             [clj-fuzzy.metrics :as fm]
-            [clj-async-profiler.core :as prof]
+            #_[clj-async-profiler.core :as prof]
             [clojure.spec.alpha :as s]
             [clojure.tools.deps.alpha.specs :as tds]
-            [find-deps.links :refer :all]))
+            [find-deps.links :refer :all]
+            [find-deps.search :refer :all]))
 
 (defmethod search :github
   [_ text]

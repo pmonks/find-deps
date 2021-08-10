@@ -64,11 +64,11 @@
     :parse-fn (comp first parse-kws)
     :default :fuzzy
     :default-desc ":fuzzy"]
-   
+
    ["-F"
     "--format=FORMAT"
     "Format for printing results - :deps, :merge, :table, :save"
-    :parse-fn (comp first parse-kws) 
+    :parse-fn (comp first parse-kws)
     :default :deps
     :default-desc ":deps"]
 
@@ -77,7 +77,7 @@
     "Limit per-search results to NUM"
     :parse-fn #(some-> % str Long/parseLong)
     :default 1]
-   
+
    ["-h" "--help"]])
 
 (defn usage [options-summary]
@@ -100,13 +100,13 @@
     (cond
       (:help options)
       {:exit-message (usage summary) :ok? true}
-      
-      errors 
+
+      errors
       {:exit-message (error-msg errors)}
-      
+
       (and (<= 1 (count arguments)))
       {:search-strings arguments :options options}
-      
+
       :else ; failed custom validation => exit with usage summary
       {:exit-message (usage summary)})))
 
