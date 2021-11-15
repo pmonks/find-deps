@@ -1,29 +1,26 @@
 {:paths ["src"]
  :deps  {org.clojure/clojure           {:mvn/version "1.10.3"}
-         metosin/jsonista              {:mvn/version "0.3.3"}
+         metosin/jsonista              {:mvn/version "0.3.4"}
          inflections/inflections       {:mvn/version "0.13.2"}
          clj-fuzzy/clj-fuzzy           {:mvn/version "0.4.1"}
          http-kit/http-kit             {:mvn/version "2.5.3"}
-         org.clojure/tools.deps.alpha  {:mvn/version "0.12.1013"}
+         org.clojure/tools.deps.alpha  {:mvn/version "0.12.1071"}
          org.clojure/spec.alpha        {:mvn/version "0.2.194"}
-         org.clojure/data.priority-map {:mvn/version "1.0.0"}}
+         org.clojure/data.priority-map {:mvn/version "1.1.0"}}
  :aliases
  {:debug {:extra-deps {com.clojure-goes-fast/clj-async-profiler {:mvn/version "0.5.1"}
                        net.harawata/appdirs {:mvn/version "1.2.1"}}}
   :test  {:extra-paths ["test"]
           :extra-deps  {org.clojure/test.check {:mvn/version "RELEASE"}}}
   :runner
-  {:extra-deps {com.cognitect/test-runner
-                {:git/url "https://github.com/cognitect-labs/test-runner"
-                 :sha     "4e7e1c0dfd5291fa2134df052443dc29695d8cbe"}}
+  {:extra-deps {com.github.cognitect-labs/test-runner {:git/sha "dd6da11611eeb87f08780a30ac8ea6012d4c05ce"}}
    :main-opts  ["-m" "cognitect.test-runner"
                 "-d" "test"]}
-  :check    {:extra-deps {athos/clj-check {:git/url "https://github.com/athos/clj-check.git"
-                                           :sha     "518d5a1cbfcd7c952f548e6dbfcb9a4a5faf9062"}}
+  :check    {:extra-deps {com.github.athos/clj-check {:git/sha "518d5a1cbfcd7c952f548e6dbfcb9a4a5faf9062"}}
              :main-opts  ["-m" "clj-check.check"]}
-  :outdated {:extra-deps {com.github.liquidz/antq {:mvn/version "0.16.2"}}
+  :outdated {:extra-deps {com.github.liquidz/antq {:mvn/version "1.2.0"}}
              :main-opts ["-m" "antq.core"]}
-  :kondo    {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2021.08.06"}}
+  :kondo    {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2021.10.19"}}
              :main-opts  ["-m" "clj-kondo.main" "--lint" "src"]}
-  :eastwood {:extra-deps {jonase/eastwood {:mvn/version "0.9.6"}}
+  :eastwood {:extra-deps {jonase/eastwood {:mvn/version "0.9.9"}}
              :main-opts  ["-m" "eastwood.lint" {:source-paths ["src" "resources"]}]}}}
